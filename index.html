@@ -46,7 +46,7 @@ footer{background:#06162f;color:white;text-align:center;padding:24px}footer b{co
 <p class="hint" id="hint">بکنگ کی درخواست ڈیٹابیس میں محفوظ ہوگی؛ کمپنی کی تصدیق کے بعد ہی بکنگ منظور ہوگی۔</p>
 </div></section>
 
-<section class="wrap" id="drivers">
+<section class="wrap" id="contact"><h2 class="heading">مالک سے رابطہ</h2><div class="card" style="text-align:center"><h3 id="ownerName">چوہدری سلطان گجر</h3><p id="ownerPhone">0301 3278532</p><a class="btn" id="ownerWhatsApp" href="https://wa.me/923013278532" target="_blank" rel="noopener">WhatsApp پر رابطہ کریں</a> <a class="btn" id="ownerCall" href="tel:+923013278532">کال کریں</a></div></section>\n<section class="wrap" id="drivers">
 <h2 class="heading">ہمارے ڈرائیور اور گاڑیاں</h2>
 <p class="hint">ڈرائیور اور گاڑیوں کی تازہ فہرست مالک کے تصدیق شدہ ایڈمن پینل سے شائع ہوگی۔</p>
 <div class="cards">
@@ -55,11 +55,11 @@ footer{background:#06162f;color:white;text-align:center;padding:24px}footer b{co
 </div>
 <p class="hint"><a href="admin.html">مالک / ڈرائیور لاگ اِن پینل</a></p>
 </section>
-<footer>گجر ٹرانسپورٹ | گجر گروپ 786<br><b>Website Developed by KB کمپنی</b></footer>
+<footer>گجر ٹرانسپورٹ | گجر گروپ 786<br><b>Website Developed by KB Web Development</b></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const supabaseClient = window.supabase.createClient("https://abapprgihwgyurdwbwyt.supabase.co", "sb_publishable_KYi-bfNt7VDyxmh1n30JrA_KaOU9vzL");
-let currentMode='p',english=false;
+let currentMode='p',english=false;\nasync function loadCompanyContact(){try{const {data}=await supabaseClient.from('company_settings').select('owner_name,owner_phone,call_phone,whatsapp_phone').eq('id',true).maybeSingle();if(!data)return;document.getElementById('ownerName').textContent=data.owner_name||'چوہدری سلطان گجر';document.getElementById('ownerPhone').textContent=data.owner_phone||'';const wa=(data.whatsapp_phone||'').replace(/\\D/g,'');const call=(data.call_phone||data.owner_phone||'').replace(/\\D/g,'');document.getElementById('ownerWhatsApp').href='https://wa.me/'+wa;document.getElementById('ownerCall').href='tel:+'+call;}catch(e){}}\nloadCompanyContact();
 const words={
 intro:['بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔','Family travel, airport transfers and goods transport from Bhalwal across Pakistan.'],
 servicesTitle:['ہماری سہولیات','Our Services'],familyTitle:['فیملی اور مسافر ٹرانسپورٹ','Family & Passenger Transport'],familyDesc:['بھلوال سے پاکستان کے مختلف شہروں کے لیے گاڑیوں کی بکنگ۔','Vehicle bookings from Bhalwal to cities across Pakistan.'],
