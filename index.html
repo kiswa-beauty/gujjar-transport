@@ -73,10 +73,26 @@ footer{font-size:1.05rem!important;line-height:2!important}
 .lang-btn.active{background:#8f1024!important;border-color:#ffd4dc!important;box-shadow:0 0 0 2px #fff5}
 .lang-btn:focus-visible{outline:3px solid #ffd166;outline-offset:3px}
 @media(max-width:560px){.language-switch{gap:5px}.lang-btn{padding:8px 12px!important;min-width:66px}}
+
+/* Clear navigation and subtle 3D depth */
+.main-menu{position:sticky;top:0;z-index:50;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px;background:rgba(7,27,59,.97);border-bottom:3px solid var(--pink-deep);box-shadow:0 7px 18px #071b3b35;backdrop-filter:blur(10px)}
+.main-menu a{display:inline-flex;align-items:center;justify-content:center;padding:9px 15px;min-height:44px;border-radius:11px;background:linear-gradient(145deg,#fff,#f4dce7);color:#54243a;text-decoration:none;font-weight:800;font-size:16px;box-shadow:0 4px 0 #c98da7,0 7px 12px #0002;transition:transform .18s ease,box-shadow .18s ease}
+.main-menu a:hover{transform:translateY(-3px);box-shadow:0 7px 0 #c98da7,0 11px 16px #0002}
+.main-menu a:active{transform:translateY(2px);box-shadow:0 2px 0 #c98da7}
+.card,.panel,.fleet-card{box-shadow:0 8px 0 #d9c4ce,0 14px 25px #071b3b12!important;transform:perspective(900px) translateZ(0);transition:transform .2s ease,box-shadow .2s ease}
+.card:hover,.fleet-card:hover{transform:perspective(900px) translateY(-4px) rotateX(1deg);box-shadow:0 11px 0 #d9c4ce,0 20px 30px #071b3b18!important}
+.btn,.submit,.tab,.lang-btn{box-shadow:0 4px 0 #9b6b7f,0 7px 13px #071b3b20!important;transition:transform .18s ease,box-shadow .18s ease}
+.btn:hover,.submit:hover,.tab:hover,.lang-btn:hover{transform:translateY(-2px)}
+.hero-logo,.brand-mark{filter:drop-shadow(0 8px 8px #0005)}
+@media(max-width:600px){.main-menu{gap:7px;padding:9px 7px}.main-menu a{font-size:14px;padding:7px 10px;min-height:40px;flex:1 1 28%}}
+@media(prefers-reduced-motion:reduce){.main-menu a,.card,.fleet-card,.btn,.submit,.tab,.lang-btn{transition:none!important}}
+
 </style>
 </head>
 <body>
 <header class="top"><div class="brand"><svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="گجر ٹرانسپورٹ لوگو"><circle cx="50" cy="50" r="46" fill="#d8ad4b"/><circle cx="50" cy="50" r="39" fill="#071b3b" stroke="#fff" stroke-width="2"/><path d="M19 61h62" stroke="#d8ad4b" stroke-width="5" stroke-linecap="round"/><path d="M27 57V43h27l10 10h10v4H27z" fill="#fff"/><path d="M55 44v10h-9V44z" fill="#d8ad4b"/><circle cx="38" cy="61" r="5" fill="#fff" stroke="#071b3b" stroke-width="2"/><circle cx="66" cy="61" r="5" fill="#fff" stroke="#071b3b" stroke-width="2"/><path d="M35 29h30" stroke="#d8ad4b" stroke-width="3" stroke-linecap="round"/><text x="50" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">786</text></svg><span>گجر ٹرانسپورٹ<small>گجر گروپ 786</small></span></div><div class="language-switch" role="group" aria-label="Language selection"><button class="lang-btn active" id="urduBtn" type="button" onclick="setLanguage(false)">اردو</button><button class="lang-btn" id="englishBtn" type="button" onclick="setLanguage(true)">English</button></div></header>
+<nav class="main-menu" aria-label="Main navigation"><a href="#servicesTitle" id="navHome">ہوم / Home</a><a href="#booking" id="navBooking">بکنگ</a><a href="#fleet" id="navFleet">گاڑیاں</a><a href="#routes" id="navRoutes">روٹس اور کرائے</a><a href="#drivers" id="navDrivers">ڈرائیورز</a><a href="#contact" id="navContact">رابطہ</a><a href="#site-qr" id="navQR">QR کوڈ</a></nav>
+
 <section class="hero"><svg class="hero-logo" viewBox="0 0 120 120" role="img" aria-label="گجر ٹرانسپورٹ گاڑیوں کا لوگو"><circle cx="60" cy="60" r="56" fill="#f3c5d8"/><circle cx="60" cy="60" r="48" fill="#071b3b" stroke="#fff" stroke-width="3"/><path d="M20 75h80" stroke="#e6b64e" stroke-width="6" stroke-linecap="round"/><path d="M27 70V48h43l17 15h10v7H27z" fill="#fff"/><path d="M72 50v13H57V50z" fill="#e6b64e"/><circle cx="45" cy="76" r="8" fill="#fff" stroke="#071b3b" stroke-width="3"/><circle cx="83" cy="76" r="8" fill="#fff" stroke="#071b3b" stroke-width="3"/><text x="60" y="39" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">786</text></svg><div class="hero-tagline">آرام دہ سفر، محفوظ منزل</div><h1>گجر ٹرانسپورٹ</h1><div class="gold">آپ کے اعتماد کا سفری ساتھی • گجر گروپ 786</div><p id="intro">بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔</p><a class="btn" href="#booking" id="cta">ابھی بکنگ کریں</a></section>
 <section class="wrap"><h2 class="heading" id="servicesTitle">ہماری سہولیات</h2><div class="cards">
 <article class="card"><div class="ico">🚐</div><h3 id="familyTitle">فیملی اور مسافر ٹرانسپورٹ</h3><p id="familyDesc">بھلوال سے پاکستان کے مختلف شہروں کے لیے گاڑیوں کی بکنگ۔</p></article>
@@ -168,7 +184,14 @@ const staticTranslations = [
  ['#drivers > p.hint','صرف مالک کے منظور کردہ فعال ڈرائیوروں کے نام دکھائے جاتے ہیں۔','Only active drivers approved by the owner are shown.'],
  ['#drivers a[href="admin.html"]','مالک / ڈرائیور لاگ اِن پینل','Owner / Driver Login Panel'],
  ['#qrTitle','ویب سائٹ کھولنے کے لیے QR کوڈ','Scan to Open Our Website'],
- ['#qrHint','موبائل کیمرے سے کوڈ اسکین کریں اور Gujjar Transport کی ویب سائٹ کھولیں۔','Scan this code with your phone camera to open the Gujjar Transport website.']
+ ['#qrHint','موبائل کیمرے سے کوڈ اسکین کریں اور Gujjar Transport کی ویب سائٹ کھولیں۔','Scan this code with your phone camera to open the Gujjar Transport website.'],
+ ['#navHome','ہوم / Home','Home'],
+ ['#navBooking','بکنگ','Booking'],
+ ['#navFleet','گاڑیاں','Our Fleet'],
+ ['#navRoutes','روٹس اور کرائے','Routes & Fares'],
+ ['#navDrivers','ڈرائیورز','Drivers'],
+ ['#navContact','رابطہ','Contact'],
+ ['#navQR','QR کوڈ','QR Code']
 ];
 function applyExtraLanguage(){
  staticTranslations.forEach(([sel,ur,en])=>{const el=document.querySelector(sel);if(el)el.textContent=english?en:ur});
