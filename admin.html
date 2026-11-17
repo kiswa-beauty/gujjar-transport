@@ -11,7 +11,7 @@
 <div class="card"><h2>مالک کی معلومات اور رابطہ نمبر</h2><p class="muted">یہ معلومات صرف مالک تبدیل کر سکتا ہے۔ OTP لاگ اِن فی الحال ای میل لنک سے ہے؛ فون OTP کے لیے SMS سروس کی علیحدہ ترتیب درکار ہے۔</p><label>مالک کا نام</label><input id="ownerNameEdit" value="چوہدری سلطان گجر"><label>مالک کا موبائل نمبر</label><input id="ownerPhoneEdit" inputmode="tel" value="0301 3278532"><label>کال کے لیے دوسرا نمبر (اختیاری)</label><input id="callPhoneEdit" inputmode="tel" placeholder="دوسرا کال نمبر"><label>WhatsApp نمبر</label><input id="whatsappPhoneEdit" inputmode="tel" value="0301 3278532"><button id="saveOwnerContact">معلومات محفوظ کریں</button></div>
 <div class="card"><h2>بکنگ درخواستیں</h2><p class="muted">صرف مالک بکنگ قبول یا مسترد کر سکتا ہے۔</p><div id="bookings">لوڈ ہو رہا ہے…</div></div>
 <div class="card"><h2>ڈرائیور شامل کریں</h2><div class="row"><div><label>ڈرائیور کا نام</label><input id="driverName"></div><div><label>موبائل نمبر</label><input id="driverPhone" inputmode="tel"></div></div><button id="addDriver">ڈرائیور محفوظ کریں</button><div id="drivers"></div></div>
-<div class="card"><h2>گاڑی شامل کریں</h2><div class="row"><div><label>گاڑی کا نام</label><input id="vehicleTitle"></div><div><label>قسم</label><select id="vehicleType"><option value="passenger">مسافر</option><option value="airport">ایئرپورٹ</option><option value="cargo">لوڈنگ / سامان</option></select></div><div><label>رجسٹریشن نمبر</label><input id="vehicleReg"></div><div><label>گنجائش</label><input id="vehicleCapacity"></div></div><button id="addVehicle">گاڑی محفوظ کریں</button><div id="vehicles"></div></div>
+<div class="card"><h2>گاڑی شامل کریں</h2><div class="row"><div><label>گاڑی کا نام</label><input id="vehicleTitle"></div><div><label>قسم</label><select id="vehicleType"><option value="passenger">مسافر</option><option value="airport">ایئرپورٹ</option><option value="cargo">لوڈنگ / سامان</option></select></div><div><label>رجسٹریشن نمبر</label><input id="vehicleReg"></div><div><label>گنجائش</label><input id="vehicleCapacity"></div><div><label>گاڑی کی تصویر (JPG, PNG, WebP — زیادہ سے زیادہ 5MB)</label><input id="vehiclePhoto" type="file" accept="image/jpeg,image/png,image/webp"></div></div><button id="addVehicle">گاڑی محفوظ کریں</button><div id="vehicles"></div></div>
 </section></main><footer style="text-align:center;padding:18px;color:#68758a">Website Developed by KB کمپنی</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 const sb=window.supabase.createClient("https://abapprgihwgyurdwbwyt.supabase.co","sb_publishable_KYi-bfNt7VDyxmh1n30JrA_KaOU9vzL");
@@ -34,8 +34,25 @@ window.setStatus=async(id,status)=>{const {error}=await sb.from('bookings').upda
 $('addDriver').onclick=async()=>{const full_name=$('driverName').value.trim(),phone=$('driverPhone').value.trim();if(!full_name||!phone)return alert('نام اور موبائل نمبر درج کریں۔');const {error}=await sb.from('drivers').insert({full_name,phone});if(error)alert(error.message);else{$('driverName').value='';$('driverPhone').value='';await loadDrivers()}};
 async function loadDrivers(){const {data,error}=await sb.from('drivers').select('id,full_name,phone,is_active').order('created_at',{ascending:false});$('drivers').innerHTML=error?'ڈرائیور لوڈ نہیں ہوئے':data.map(d=>'<p>'+safe(d.full_name)+' — '+safe(d.phone)+' <button class="red" onclick="delDriver(\''+d.id+'\')">حذف</button></p>').join('')}
 window.delDriver=async id=>{if(!confirm('کیا واقعی یہ ڈرائیور حذف کرنا ہے؟'))return;const {error}=await sb.from('drivers').delete().eq('id',id);if(error)alert(error.message);else await loadDrivers()};
-$('addVehicle').onclick=async()=>{const title=$('vehicleTitle').value.trim();if(!title)return alert('گاڑی کا نام درج کریں۔');const row={title,vehicle_type:$('vehicleType').value,registration_no:$('vehicleReg').value.trim()||null,capacity:$('vehicleCapacity').value.trim()||null};const {error}=await sb.from('vehicles').insert(row);if(error)alert(error.message);else{$('vehicleTitle').value='';$('vehicleReg').value='';$('vehicleCapacity').value='';await loadVehicles()}};
-async function loadVehicles(){const {data,error}=await sb.from('vehicles').select('id,title,vehicle_type,registration_no,is_active').order('created_at',{ascending:false});$('vehicles').innerHTML=error?'گاڑیاں لوڈ نہیں ہوئیں':data.map(v=>'<p>'+safe(v.title)+' — '+safe(v.vehicle_type)+' — '+safe(v.registration_no||'')+' <button class="red" onclick="delVehicle(\''+v.id+'\')">حذف</button></p>').join('')}
-window.delVehicle=async id=>{if(!confirm('کیا واقعی یہ گاڑی حذف کرنی ہے؟'))return;const {error}=await sb.from('vehicles').delete().eq('id',id);if(error)alert(error.message);else await loadVehicles()};
+$('addVehicle').onclick=async()=>{
+ const title=$('vehicleTitle').value.trim(),file=$('vehiclePhoto').files[0];
+ if(!title)return alert('گاڑی کا نام درج کریں۔');
+ if(file&&(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5242880))return alert('صرف JPG, PNG یا WebP تصویر، زیادہ سے زیادہ 5MB اپلوڈ کریں۔');
+ $('addVehicle').disabled=true;
+ try{
+  const row={title,vehicle_type:$('vehicleType').value,registration_no:$('vehicleReg').value.trim()||null,capacity:$('vehicleCapacity').value.trim()||null};
+  const {data,error}=await sb.from('vehicles').insert(row).select('id').single();if(error)throw error;
+  if(file){
+   const ext=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';
+   const path='vehicles/'+crypto.randomUUID()+'.'+ext;
+   const {error:upErr}=await sb.storage.from('vehicle-photos').upload(path,file,{contentType:file.type,upsert:false});if(upErr)throw upErr;
+   const {error:updateErr}=await sb.from('vehicles').update({photo_path:path}).eq('id',data.id);if(updateErr)throw updateErr;
+  }
+  $('vehicleTitle').value='';$('vehicleReg').value='';$('vehicleCapacity').value='';$('vehiclePhoto').value='';await loadVehicles();alert('گاڑی محفوظ ہوگئی۔');
+ }catch(e){alert('گاڑی محفوظ نہیں ہوئی: '+e.message)}finally{$('addVehicle').disabled=false}
+};
+async function loadVehicles(){const {data,error}=await sb.from('vehicles').select('id,title,vehicle_type,registration_no,photo_path,is_active').order('created_at',{ascending:false});$('vehicles').innerHTML=error?'گاڑیاں لوڈ نہیں ہوئیں':data.map(v=>'<p>'+(v.photo_path?'<img src="'+sb.storage.from('vehicle-photos').getPublicUrl(v.photo_path).data.publicUrl+'" alt="" style="width:75px;height:55px;object-fit:cover;vertical-align:middle;border-radius:6px"> ':'')+safe(v.title)+' — '+safe(v.vehicle_type)+' — '+safe(v.registration_no||'')+' <button onclick="toggleVehicle(\\''+v.id+'\\','+(!v.is_active)+')">'+(v.is_active?'ویب سائٹ سے چھپائیں':'ویب سائٹ پر دکھائیں')+'</button><button class="red" onclick="delVehicle(\\''+v.id+'\\')">حذف</button></p>').join('')};
+window.toggleVehicle=async(id,is_active)=>{const {error}=await sb.from('vehicles').update({is_active}).eq('id',id);if(error)alert(error.message);else await loadVehicles()};
+window.delVehicle=async id=>{if(!confirm('کیا واقعی یہ گاڑی حذف کرنی ہے؟'))return;const {data}=await sb.from('vehicles').select('photo_path').eq('id',id).maybeSingle();const {error}=await sb.from('vehicles').delete().eq('id',id);if(error)alert(error.message);else{if(data?.photo_path)await sb.storage.from('vehicle-photos').remove([data.photo_path]);await loadVehicles()}};
 sb.auth.onAuthStateChange((_event,session)=>{setTimeout(()=>sessionChanged(session),0)});sb.auth.getSession().then(({data})=>sessionChanged(data.session));
 </script></body></html>
