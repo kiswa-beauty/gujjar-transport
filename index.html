@@ -66,10 +66,17 @@ footer{font-size:1.05rem!important;line-height:2!important}
  button,.btn,.tab,.submit,input,select,textarea{font-size:1.02rem!important}
 }
 
+
+/* Clear red bilingual language buttons */
+.language-switch{display:flex;align-items:center;gap:8px;direction:ltr;flex-shrink:0}
+.lang-btn{background:#c91f35!important;color:#fff!important;border:2px solid #c91f35!important;border-radius:10px!important;padding:10px 18px!important;min-width:76px;min-height:48px;font-size:1.05rem!important;font-weight:800!important;cursor:pointer;box-shadow:0 3px 9px #8f142733}
+.lang-btn.active{background:#8f1024!important;border-color:#ffd4dc!important;box-shadow:0 0 0 2px #fff5}
+.lang-btn:focus-visible{outline:3px solid #ffd166;outline-offset:3px}
+@media(max-width:560px){.language-switch{gap:5px}.lang-btn{padding:8px 12px!important;min-width:66px}}
 </style>
 </head>
 <body>
-<header class="top"><div class="brand"><svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="گجر ٹرانسپورٹ لوگو"><circle cx="50" cy="50" r="46" fill="#d8ad4b"/><circle cx="50" cy="50" r="39" fill="#071b3b" stroke="#fff" stroke-width="2"/><path d="M19 61h62" stroke="#d8ad4b" stroke-width="5" stroke-linecap="round"/><path d="M27 57V43h27l10 10h10v4H27z" fill="#fff"/><path d="M55 44v10h-9V44z" fill="#d8ad4b"/><circle cx="38" cy="61" r="5" fill="#fff" stroke="#071b3b" stroke-width="2"/><circle cx="66" cy="61" r="5" fill="#fff" stroke="#071b3b" stroke-width="2"/><path d="M35 29h30" stroke="#d8ad4b" stroke-width="3" stroke-linecap="round"/><text x="50" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">786</text></svg><span>گجر ٹرانسپورٹ<small>گجر گروپ 786</small></span></div><button class="btn" type="button" onclick="toggleLanguage()">English</button></header>
+<header class="top"><div class="brand"><svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="گجر ٹرانسپورٹ لوگو"><circle cx="50" cy="50" r="46" fill="#d8ad4b"/><circle cx="50" cy="50" r="39" fill="#071b3b" stroke="#fff" stroke-width="2"/><path d="M19 61h62" stroke="#d8ad4b" stroke-width="5" stroke-linecap="round"/><path d="M27 57V43h27l10 10h10v4H27z" fill="#fff"/><path d="M55 44v10h-9V44z" fill="#d8ad4b"/><circle cx="38" cy="61" r="5" fill="#fff" stroke="#071b3b" stroke-width="2"/><circle cx="66" cy="61" r="5" fill="#fff" stroke="#071b3b" stroke-width="2"/><path d="M35 29h30" stroke="#d8ad4b" stroke-width="3" stroke-linecap="round"/><text x="50" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">786</text></svg><span>گجر ٹرانسپورٹ<small>گجر گروپ 786</small></span></div><div class="language-switch" role="group" aria-label="Language selection"><button class="lang-btn active" id="urduBtn" type="button" onclick="setLanguage(false)">اردو</button><button class="lang-btn" id="englishBtn" type="button" onclick="setLanguage(true)">English</button></div></header>
 <section class="hero"><svg class="hero-logo" viewBox="0 0 120 120" role="img" aria-label="گجر ٹرانسپورٹ گاڑیوں کا لوگو"><circle cx="60" cy="60" r="56" fill="#f3c5d8"/><circle cx="60" cy="60" r="48" fill="#071b3b" stroke="#fff" stroke-width="3"/><path d="M20 75h80" stroke="#e6b64e" stroke-width="6" stroke-linecap="round"/><path d="M27 70V48h43l17 15h10v7H27z" fill="#fff"/><path d="M72 50v13H57V50z" fill="#e6b64e"/><circle cx="45" cy="76" r="8" fill="#fff" stroke="#071b3b" stroke-width="3"/><circle cx="83" cy="76" r="8" fill="#fff" stroke="#071b3b" stroke-width="3"/><text x="60" y="39" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff">786</text></svg><div class="hero-tagline">آرام دہ سفر، محفوظ منزل</div><h1>گجر ٹرانسپورٹ</h1><div class="gold">آپ کے اعتماد کا سفری ساتھی • گجر گروپ 786</div><p id="intro">بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔</p><a class="btn" href="#booking" id="cta">ابھی بکنگ کریں</a></section>
 <section class="wrap"><h2 class="heading" id="servicesTitle">ہماری سہولیات</h2><div class="cards">
 <article class="card"><div class="ico">🚐</div><h3 id="familyTitle">فیملی اور مسافر ٹرانسپورٹ</h3><p id="familyDesc">بھلوال سے پاکستان کے مختلف شہروں کے لیے گاڑیوں کی بکنگ۔</p></article>
@@ -148,10 +155,10 @@ cargoTitle:['لوڈنگ اور سامان کی ترسیل','Loading & Goods Tran
 bookingTitle:['آن لائن بکنگ کی درخواست','Online Booking Request'],nameText:['نام','Name'],phoneText:['موبائل نمبر','Mobile Number'],fromText:['کہاں سے','Pickup Location'],destinationText:['منزل شہر','Destination City'],dateText:['سفر کی تاریخ','Travel Date'],passengerText:['مسافروں کی تعداد','Number of Passengers'],airportText:['ایئرپورٹ / فلائٹ کی تفصیل','Airport / Flight Details'],cargoText:['سامان / لوڈ کی تفصیل','Goods / Load Details'],vehicleText:['گاڑی کی قسم','Vehicle Type'],detailsText:['مزید تفصیل','Additional Details'],submitText:['درخواست جمع کروائیں','Submit Booking Request'],
 hint:['بکنگ درخواست موصول ہونے کے بعد کمپنی آپ سے رابطہ کرے گی؛ تصدیق کے بعد ہی بکنگ منظور ہوگی۔','The company will contact you after receiving the request. Bookings are confirmed by the company.']
 };
-function toggleLanguage(){
- english=!english;document.documentElement.lang=english?'en':'ur';document.documentElement.dir=english?'ltr':'rtl';
+function setLanguage(nextEnglish){
+ english=Boolean(nextEnglish);document.documentElement.lang=english?'en':'ur';document.documentElement.dir=english?'ltr':'rtl';
  Object.keys(words).forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=words[id][english?1:0]});
- document.querySelector('.top button').textContent=english?'اردو':'English';
+ document.getElementById('urduBtn').classList.toggle('active',!english);document.getElementById('englishBtn').classList.toggle('active',english);
  document.getElementById('cta').textContent=english?'Book Now':'ابھی بکنگ کریں';
  document.getElementById('pTab').textContent=english?'Passenger / Family':'مسافر / فیملی';
  document.getElementById('aTab').textContent=english?'Airport':'ایئرپورٹ';
