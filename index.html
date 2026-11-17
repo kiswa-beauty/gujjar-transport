@@ -86,7 +86,7 @@ async function loadPublicRoutes(){
 }
 async function loadPublicDrivers(){
  const el=document.getElementById('publicDrivers');
- try{const {data,error}=await supabaseClient.from('drivers').select('full_name').eq('is_active',true).order('created_at',{ascending:false});if(error)throw error;
+ try{const {data,error}=await supabaseClient.from('drivers').select('full_name').eq('is_active',true);if(error)throw error;
  el.innerHTML=data.length?data.map(d=>'<article class="card"><div class="ico">👨‍✈️</div><h3>'+String(d.full_name).replace(/[&<>"']/g,'')+'</h3></article>').join(''):'<div class="fleet-empty">ڈرائیورز کی فہرست جلد اپڈیٹ ہوگی | Driver list will be updated soon</div>';
  }catch(e){el.innerHTML='<div class="fleet-empty">ڈرائیورز کی فہرست دستیاب نہیں</div>';}
 }
