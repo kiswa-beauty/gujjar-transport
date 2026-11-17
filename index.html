@@ -1,1 +1,91 @@
-<!doctype html><html lang="ur" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>گجر ٹرانسپورٹ | گجر گروپ 786</title><style>:root{--n:#071b3b;--g:#d8ad4b}*{box-sizing:border-box}body{margin:0;font-family:Arial,system-ui;background:#f5f7fb;color:#18263b;line-height:1.7}.top{background:var(--n);color:white;border-bottom:4px solid var(--g);padding:16px 5%;display:flex;justify-content:space-between}.brand{font-size:25px;font-weight:bold}.brand small{display:block;color:var(--g);font-size:14px}.btn{background:var(--g);color:var(--n);border:0;border-radius:9px;padding:10px 16px;font-weight:bold}.hero{background:linear-gradient(120deg,#071b3b,#183d70);color:white;text-align:center;padding:45px 18px}.hero h1{font-size:clamp(34px,7vw,56px);margin:0}.gold{color:var(--g);font-size:22px;font-weight:bold}.wrap{max-width:1000px;margin:auto;padding:28px 16px}.heading{text-align:center;color:var(--n)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.card,.panel{background:white;border:1px solid #e3e8f0;border-radius:15px;padding:20px}.card h3{color:var(--n)}.ico{font-size:30px}.booking{background:#fffaf0;border-block:1px solid #f0dfb7}.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:15px}.tab{padding:10px 14px;border-radius:8px;border:1px solid #ccd5e1;background:white}.tab.active{background:var(--n);color:white}.form{max-width:720px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}.form label{font-weight:bold;font-size:14px}.form input,.form select,.form textarea{display:block;width:100%;padding:12px;border:1px solid #ccd5e1;border-radius:8px;margin-top:4px;font:inherit}.wide{grid-column:1/-1}.submit{background:var(--n);color:white;border:0;border-radius:8px;padding:13px;font:inherit;font-weight:bold}.hint{text-align:center;color:#66758a;font-size:13px}footer{background:#06162f;color:white;text-align:center;padding:24px}footer b{color:var(--g)}.hide{display:none}@media(max-width:560px){.form{grid-template-columns:1fr}.wide{grid-column:auto}}</style></head><body><header class="top"><div class="brand">گجر ٹرانسپورٹ<small>گجر گروپ 786</small></div><button class="btn" onclick="lang()">English</button></header><section class="hero"><h1 id="title">گجر ٹرانسپورٹ</h1><div class="gold">گجر گروپ 786</div><p id="intro">بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔</p><a class="btn" href="#booking" id="cta">ابھی بکنگ کریں</a></section><section class="wrap"><h2 class="heading" id="services">ہماری سہولیات</h2><div class="cards"><article class="card"><div class="ico">🚐</div><h3 id="family">فیملی اور مسافر ٹرانسپورٹ</h3><p id="familyd">بھلوال سے پاکستان کے مختلف شہروں کے لیے گاڑیوں کی بکنگ۔</p></article><article class="card"><div class="ico">✈️</div><h3 id="airport">ایئرپورٹ پک اَپ اور ڈراپ</h3><p id="airportd">ایئرپورٹ آنے جانے کے لیے آرام دہ گاڑیاں۔</p></article><article class="card"><div class="ico">🚚</div><h3 id="cargo">لوڈنگ اور سامان کی ترسیل</h3><p id="cargod">سامان اور مال برداری کے لیے الگ گاڑیوں کی بکنگ۔</p></article></div></section><section class="booking" id="booking"><div class="wrap"><h2 class="heading" id="booktitle">آن لائن بکنگ کی درخواست</h2><div class="tabs"><button class="tab active" id="pTab" onclick="mode('p')">مسافر / فیملی</button><button class="tab" id="aTab" onclick="mode('a')">ایئرپورٹ</button><button class="tab" id="lTab" onclick="mode('l')">لوڈنگ</button></div><form class="form panel" onsubmit="event.preventDefault();alert('بکنگ محفوظ کرنے کا نظام ڈیٹابیس منسلک ہونے کے بعد فعال ہوگا۔')"><label id="nLabel">نام<input required></label><label id="phLabel">موبائل نمبر<input type="tel" required></label><label id="fLabel">کہاں سے<input value="بھلوال" required></label><label id="toLabel">منزل شہر<select required><option value="">شہر منتخب کریں</option><option>لاہور</option><option>اسلام آباد</option><option>راولپنڈی</option><option>سرگودھا</option><option>فیصل آباد</option><option>گوجرانوالہ</option><option>سیالکوٹ</option><option>گجرات</option><option>ملتان</option><option>بہاولپور</option><option>کراچی</option><option>حیدرآباد</option><option>پشاور</option><option>کوئٹہ</option><option>مظفرآباد</option><option>گلگت</option><option>دیگر</option></select></label><label id="dateLabel">سفر کی تاریخ<input type="date" required></label><label id="countLabel">مسافروں کی تعداد<input type="number" min="1" value="1"></label><label class="wide" id="detailLabel">مزید تفصیل<textarea rows="2"></textarea></label><button class="submit wide" id="send">درخواست جمع کروائیں</button></form><p class="hint" id="hint">یہ فارم ابھی نمونہ ہے؛ بکنگ اور ایڈمن پینل کے لیے الگ ڈیٹابیس درکار ہے۔</p></div></section><footer>گجر ٹرانسپورٹ | گجر گروپ 786<br><b>Website Developed by KB کمپنی</b></footer><script>let m='p',en=false;function mode(x){m=x;['pTab','aTab','lTab'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',['p','a','l'][i]===x));document.getElementById('booktitle').textContent=(en?['Passenger / Family Booking','Airport Transfer Booking','Loading Booking']:['مسافر / فیملی بکنگ','ایئرپورٹ بکنگ','لوڈنگ بکنگ'])[['p','a','l'].indexOf(x)];document.getElementById('countLabel').classList.toggle('hide',x==='l')}function lang(){en=!en;document.documentElement.lang=en?'en':'ur';document.documentElement.dir=en?'ltr':'rtl';let d={title:['گجر ٹرانسپورٹ','Gujjar Transport'],intro:['بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔','Family travel, airport transfers and cargo transport from Bhalwal across Pakistan.'],cta:['ابھی بکنگ کریں','Book Now'],services:['ہماری سہولیات','Our Services'],family:['فیملی اور مسافر ٹرانسپورٹ','Family & Passenger Transport'],familyd:['بھلوال سے پاکستان کے مختلف شہروں کے لیے گاڑیوں کی بکنگ۔','Vehicle bookings from Bhalwal to cities across Pakistan.'],airport:['ایئرپورٹ پک اَپ اور ڈراپ','Airport Pick-up & Drop-off'],airportd:['ایئرپورٹ آنے جانے کے لیے آرام دہ گاڑیاں۔','Comfortable airport transfers.'],cargo:['لوڈنگ اور سامان کی ترسیل','Loading & Goods Transport'],cargod:['سامان اور مال برداری کے لیے الگ گاڑیوں کی بکنگ۔','Separate vehicle bookings for cargo and goods.'],booktitle:['آن لائن بکنگ کی درخواست','Online Booking Request'],nLabel:['نام','Name'],phLabel:['موبائل نمبر','Mobile Number'],fLabel:['کہاں سے','From'],toLabel:['منزل شہر','Destination City'],dateLabel:['سفر کی تاریخ','Travel Date'],countLabel:['مسافروں کی تعداد','Number of Passengers'],detailLabel:['مزید تفصیل','Additional Details'],send:['درخواست جمع کروائیں','Submit Request'],hint:['یہ فارم ابھی نمونہ ہے؛ بکنگ اور ایڈمن پینل کے لیے الگ ڈیٹابیس درکار ہے۔','This form is a preview; a separate database is required for live bookings and the admin panel.']};for(let k in d){let el=document.getElementById(k);if(el)el.textContent=d[k][en?1:0]}document.querySelector('.top button').textContent=en?'اردو':'English';document.getElementById('pTab').textContent=en?'Passenger / Family':'مسافر / فیملی';document.getElementById('aTab').textContent=en?'Airport':'ایئرپورٹ';document.getElementById('lTab').textContent=en?'Loading':'لوڈنگ';mode(m)}</script></body></html>
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>گجر ٹرانسپورٹ | گجر گروپ 786</title>
+<style>
+:root{--navy:#071b3b;--gold:#d8ad4b;--ink:#18263b;--muted:#66758a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,system-ui,sans-serif;background:#f5f7fb;color:var(--ink);line-height:1.7}
+.top{background:var(--navy);color:#fff;border-bottom:4px solid var(--gold);padding:14px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:25px;font-weight:800}.brand small{display:block;color:var(--gold);font-size:14px}
+.btn{display:inline-block;background:var(--gold);color:var(--navy);border:0;border-radius:9px;padding:10px 16px;font-weight:bold;text-decoration:none;cursor:pointer}
+.hero{background:linear-gradient(120deg,#071b3b,#183d70);color:white;text-align:center;padding:48px 18px}.hero h1{font-size:clamp(34px,7vw,56px);margin:0}.gold{color:var(--gold);font-size:22px;font-weight:bold}
+.wrap{max-width:1000px;margin:auto;padding:28px 16px}.heading{text-align:center;color:var(--navy)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.card,.panel{background:white;border:1px solid #e3e8f0;border-radius:15px;padding:20px}.card h3{color:var(--navy)}.ico{font-size:30px}
+.booking{background:#fffaf0;border-block:1px solid #f0dfb7}.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:15px}.tab{padding:10px 14px;border-radius:8px;border:1px solid #ccd5e1;background:white;cursor:pointer;font:inherit}.tab.active{background:var(--navy);color:white}
+.form{max-width:760px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}.form label{font-weight:bold;font-size:14px;display:block}.form input,.form select,.form textarea{display:block;width:100%;padding:12px;border:1px solid #ccd5e1;border-radius:8px;margin-top:4px;font:inherit;background:white;color:var(--ink)}.wide{grid-column:1/-1}.submit{background:var(--navy);color:white;border:0;border-radius:8px;padding:13px;font:inherit;font-weight:bold;cursor:pointer}.hint{text-align:center;color:var(--muted);font-size:13px}.hide{display:none!important}
+.notice{max-width:760px;margin:14px auto 0;padding:12px;border-radius:9px;background:#edf5ff;color:#17345a;display:none;text-align:center}
+footer{background:#06162f;color:white;text-align:center;padding:24px}footer b{color:var(--gold)}
+@media(max-width:560px){.form{grid-template-columns:1fr}.wide{grid-column:auto}.top{padding:12px 4%}.brand{font-size:21px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand">گجر ٹرانسپورٹ<small>گجر گروپ 786</small></div><button class="btn" type="button" onclick="toggleLanguage()">English</button></header>
+<section class="hero"><h1>گجر ٹرانسپورٹ</h1><div class="gold">گجر گروپ 786</div><p id="intro">بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔</p><a class="btn" href="#booking" id="cta">ابھی بکنگ کریں</a></section>
+<section class="wrap"><h2 class="heading" id="servicesTitle">ہماری سہولیات</h2><div class="cards">
+<article class="card"><div class="ico">🚐</div><h3 id="familyTitle">فیملی اور مسافر ٹرانسپورٹ</h3><p id="familyDesc">بھلوال سے پاکستان کے مختلف شہروں کے لیے گاڑیوں کی بکنگ۔</p></article>
+<article class="card"><div class="ico">✈️</div><h3 id="airportTitle">ایئرپورٹ پک اَپ اور ڈراپ</h3><p id="airportDesc">ایئرپورٹ آنے جانے کے لیے آرام دہ گاڑیاں۔</p></article>
+<article class="card"><div class="ico">🚚</div><h3 id="cargoTitle">لوڈنگ اور سامان کی ترسیل</h3><p id="cargoDesc">سامان اور مال برداری کے لیے الگ گاڑیوں کی بکنگ۔</p></article>
+</div></section>
+<section class="booking" id="booking"><div class="wrap"><h2 class="heading" id="bookingTitle">آن لائن بکنگ کی درخواست</h2>
+<div class="tabs"><button type="button" class="tab active" id="pTab" onclick="setMode('p')">مسافر / فیملی</button><button type="button" class="tab" id="aTab" onclick="setMode('a')">ایئرپورٹ</button><button type="button" class="tab" id="lTab" onclick="setMode('l')">لوڈنگ</button></div>
+<form class="form panel" id="bookingForm">
+<label><span id="nameText">نام</span><input id="customerName" name="customerName" autocomplete="name" required></label>
+<label><span id="phoneText">موبائل نمبر</span><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
+<label><span id="fromText">کہاں سے</span><input id="from" name="from" value="بھلوال" required></label>
+<label><span id="destinationText">منزل شہر</span><select id="destination" name="destination" required><option value="">شہر منتخب کریں</option>
+<option>لاہور</option><option>اسلام آباد</option><option>راولپنڈی</option><option>سرگودھا</option><option>فیصل آباد</option><option>گوجرانوالہ</option><option>سیالکوٹ</option><option>گجرات</option><option>ملتان</option><option>بہاولپور</option><option>کراچی</option><option>حیدرآباد</option><option>سکھر</option><option>پشاور</option><option>مردان</option><option>کوئٹہ</option><option>مظفرآباد</option><option>میرپور</option><option>گلگت</option><option>اسکردو</option><option>ایبٹ آباد</option><option>جہلم</option><option>چکوال</option><option>خوشاب</option><option>میانوالی</option><option>بھکر</option><option>لیہ</option><option>ڈی جی خان</option><option>رحیم یار خان</option><option>ساہیوال</option><option>اوکاڑہ</option><option>قصور</option><option>شیخوپورہ</option><option>نارووال</option><option>دیگر</option></select></label>
+<label><span id="dateText">سفر کی تاریخ</span><input id="travelDate" name="travelDate" type="date" required></label>
+<label id="passengerField"><span id="passengerText">مسافروں کی تعداد</span><input id="passengers" name="passengers" type="number" min="1" max="60" value="1"></label>
+<label id="airportField" class="hide"><span id="airportText">ایئرپورٹ / فلائٹ کی تفصیل</span><input id="airportDetails" name="airportDetails" placeholder="مثلاً لاہور ایئرپورٹ، فلائٹ نمبر"></label>
+<label id="cargoField" class="hide"><span id="cargoText">سامان / لوڈ کی تفصیل</span><input id="cargoDetails" name="cargoDetails" placeholder="سامان کی نوعیت اور اندازاً وزن"></label>
+<label id="vehicleField" class="hide"><span id="vehicleText">گاڑی کی قسم</span><select id="vehicleType" name="vehicleType"><option value="">منتخب کریں</option><option>چھوٹی لوڈر</option><option>شہزور</option><option>مزدا</option><option>ٹرک</option><option>دیگر</option></select></label>
+<label class="wide"><span id="detailsText">مزید تفصیل</span><textarea id="details" name="details" rows="2"></textarea></label>
+<button class="submit wide" type="submit" id="submitText">درخواست جمع کروائیں</button>
+</form><div class="notice" id="notice" role="status"></div>
+<p class="hint" id="hint">یہ فی الحال ڈیزائن کا پیش منظر ہے۔ حقیقی بکنگ محفوظ کرنے اور ایڈمن پینل کے لیے الگ ڈیٹابیس منسلک کرنا ضروری ہے۔</p>
+</div></section>
+<footer>گجر ٹرانسپورٹ | گجر گروپ 786<br><b>Website Developed by KB کمپنی</b></footer>
+<script>
+let currentMode='p',english=false;
+const words={
+intro:['بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔','Family travel, airport transfers and goods transport from Bhalwal across Pakistan.'],
+servicesTitle:['ہماری سہولیات','Our Services'],familyTitle:['فیملی اور مسافر ٹرانسپورٹ','Family & Passenger Transport'],familyDesc:['بھلوال سے پاکستان کے مختلف شہروں کے لیے گاڑیوں کی بکنگ۔','Vehicle bookings from Bhalwal to cities across Pakistan.'],
+airportTitle:['ایئرپورٹ پک اَپ اور ڈراپ','Airport Pick-up & Drop-off'],airportDesc:['ایئرپورٹ آنے جانے کے لیے آرام دہ گاڑیاں۔','Comfortable airport transfers.'],
+cargoTitle:['لوڈنگ اور سامان کی ترسیل','Loading & Goods Transport'],cargoDesc:['سامان اور مال برداری کے لیے الگ گاڑیوں کی بکنگ۔','Separate vehicle bookings for cargo and goods.'],
+bookingTitle:['آن لائن بکنگ کی درخواست','Online Booking Request'],nameText:['نام','Name'],phoneText:['موبائل نمبر','Mobile Number'],fromText:['کہاں سے','Pickup Location'],destinationText:['منزل شہر','Destination City'],dateText:['سفر کی تاریخ','Travel Date'],passengerText:['مسافروں کی تعداد','Number of Passengers'],airportText:['ایئرپورٹ / فلائٹ کی تفصیل','Airport / Flight Details'],cargoText:['سامان / لوڈ کی تفصیل','Goods / Load Details'],vehicleText:['گاڑی کی قسم','Vehicle Type'],detailsText:['مزید تفصیل','Additional Details'],submitText:['درخواست جمع کروائیں','Submit Booking Request'],
+hint:['یہ فی الحال ڈیزائن کا پیش منظر ہے۔ حقیقی بکنگ محفوظ کرنے اور ایڈمن پینل کے لیے الگ ڈیٹابیس منسلک کرنا ضروری ہے.','This is currently a design preview. A separate database is required to save real bookings and provide an admin panel.']
+};
+function toggleLanguage(){
+ english=!english;document.documentElement.lang=english?'en':'ur';document.documentElement.dir=english?'ltr':'rtl';
+ Object.keys(words).forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=words[id][english?1:0]});
+ document.querySelector('.top button').textContent=english?'اردو':'English';
+ document.getElementById('cta').textContent=english?'Book Now':'ابھی بکنگ کریں';
+ document.getElementById('pTab').textContent=english?'Passenger / Family':'مسافر / فیملی';
+ document.getElementById('aTab').textContent=english?'Airport':'ایئرپورٹ';
+ document.getElementById('lTab').textContent=english?'Loading':'لوڈنگ';
+ const dest=document.getElementById('destination');dest.options[0].text=english?'Select a city':'شہر منتخب کریں';
+ document.querySelectorAll('#destination option').forEach((o,i)=>{if(i>0&&o.value==='دیگر')o.text=english?'Other':'دیگر'});
+ setMode(currentMode);
+}
+function setMode(mode){
+ currentMode=mode;
+ ['p','a','l'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('active',x===mode));
+ document.getElementById('passengerField').classList.toggle('hide',mode==='l');
+ document.getElementById('airportField').classList.toggle('hide',mode!=='a');
+ document.getElementById('cargoField').classList.toggle('hide',mode!=='l');
+ document.getElementById('vehicleField').classList.toggle('hide',mode!=='l');
+ document.getElementById('passengers').required=mode!=='l';
+ document.getElementById('airportDetails').required=mode==='a';
+ document.getElementById('cargoDetails').required=mode==='l';
+ document.getElementById('vehicleType').required=mode==='l';
+ document.getElementById('bookingTitle').textContent=(english?{p:'Passenger / Family Booking',a:'Airport Transfer Booking',l:'Loading & Goods Booking'}:{p:'مسافر / فیملی بکنگ',a:'ایئرپورٹ بکنگ',l:'لوڈنگ اور سامان کی بکنگ'})[mode];
+ document.getElementById('notice').style.display='none';
+}
+document.getElementById('bookingForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ const message=english?'Your form preview is working, but this request has NOT been sent or saved. Live booking will be enabled after a separate database and admin panel are connected.':'فارم درست کام کر رہا ہے، لیکن یہ درخواست ابھی بھیجی یا محفوظ نہیں ہوئی۔ حقیقی بکنگ کے لیے الگ ڈیٹابیس اور ایڈمن پینل منسلک کرنا ہوگا۔';
+ const box=document.getElementById('notice');box.textContent=message;box.style.display='block';
+});
+</script>
+</body></html>
