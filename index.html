@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>گجر ٹرانسپورٹ | گجر گروپ 786</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#071b3b;--gold:#d8ad4b;--ink:#18263b;--muted:#66758a}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,system-ui,sans-serif;background:#f5f7fb;color:var(--ink);line-height:1.7}
@@ -91,7 +91,7 @@ footer{font-size:1.05rem!important;line-height:2!important}
 
 /* HD readability: sharper type, strong contrast, clean spacing */
 html{ -webkit-text-size-adjust:100%; text-rendering:optimizeLegibility; }
-body{font-family:'Noto Nastaliq Urdu','Noto Naskh Arabic',Arial,sans-serif!important;color:#10213a!important;background:#fff!important;font-weight:500!important}
+body{font-family:'Noto Sans Arabic','Noto Naskh Arabic',Arial,sans-serif!important;color:#10213a!important;background:#fff!important;font-weight:500!important}
 body[dir="ltr"],html[dir="ltr"] body{font-family:Inter,Arial,sans-serif!important}
 p,li,label,.hint,.fleet-empty{color:#24344b!important;font-weight:500!important;text-shadow:none!important}
 h1,h2,h3,.heading{color:#071b3b;font-weight:800!important;text-shadow:none!important}
@@ -110,6 +110,30 @@ button,.btn,.tab,.submit,.lang-btn{font-weight:800!important;text-shadow:none!im
  p,li,label,.hint,.fleet-empty{font-size:1.04rem!important}
  .heading{line-height:1.8!important}
  .card,.panel{padding:16px!important}
+}
+
+
+/* Final clarity pass: use a screen-first Urdu font rather than decorative Nastaliq */
+html{font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Noto Sans Arabic',Arial,sans-serif!important;font-weight:500!important;letter-spacing:0!important;color:#101d32!important}
+html[dir="ltr"] body{font-family:Inter,Arial,sans-serif!important}
+body,button,input,select,textarea{ text-shadow:none!important}
+p,li,label,.hint,.fleet-empty{font-weight:500!important;color:#17263b!important}
+h1,h2,h3,.heading{font-weight:800!important;color:#071b3b!important}
+.hero h1{color:#fff!important}
+.hero .gold{color:#ffe39a!important}
+.form label{line-height:1.7!important}
+.form input,.form select,.form textarea{line-height:1.55!important;min-height:54px!important}
+.main-menu a{font-family:Inter,'Noto Sans Arabic',Arial,sans-serif!important;font-size:15px!important;line-height:1.45!important}
+.lang-btn{font-family:Inter,'Noto Sans Arabic',Arial,sans-serif!important}
+@media(max-width:600px){
+ html{font-size:17px!important}
+ body{font-size:18px!important;line-height:1.9!important}
+ h1{font-size:2.2rem!important}
+ h2,.heading{font-size:1.65rem!important}
+ h3{font-size:1.25rem!important}
+ p,li,label,.hint,.muted,.description,.subtitle{font-size:1rem!important;line-height:1.85!important}
+ .main-menu a{font-size:13px!important;padding:7px 8px!important}
 }
 
 </style>
