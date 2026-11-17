@@ -45,6 +45,27 @@ footer b{color:#9c315f}
 @media(max-width:560px){.brand{font-size:26px}.brand small{font-size:16px}.brand-mark{width:62px;height:62px;flex-basis:62px}.hero-logo{width:96px;height:96px}.hero{padding:32px 16px 44px}}
 
 @media(max-width:560px){.form{grid-template-columns:1fr}.wide{grid-column:auto}.top{padding:12px 4%}.brand{font-size:24px}.brand small{font-size:15px}.brand-mark{width:54px;height:54px;flex-basis:54px}.hero{padding:40px 16px}.hero h1{font-size:clamp(38px,10vw,52px)}}
+
+/* Accessibility: larger, easier-to-read text across the whole site */
+html{font-size:19px}
+body{font-size:20px!important;line-height:2!important}
+body,button,input,select,textarea{font-family:inherit}
+p,li,label,small,.hint,.muted,.description,.subtitle{font-size:1.08rem!important;line-height:1.9!important}
+h1{font-size:clamp(2.5rem,7vw,3.8rem)!important;line-height:1.45!important}
+h2,.heading{font-size:clamp(1.8rem,5vw,2.5rem)!important;line-height:1.5!important}
+h3{font-size:1.45rem!important;line-height:1.6!important}
+button,.btn,.tab,.submit{font-size:1.08rem!important;min-height:48px;line-height:1.6!important}
+input,select,textarea{font-size:1.08rem!important;min-height:48px;line-height:1.6!important;padding:12px!important}
+input::placeholder,textarea::placeholder{font-size:1rem!important}
+nav a,.nav a{font-size:1.05rem!important}
+footer{font-size:1.05rem!important;line-height:2!important}
+@media(max-width:600px){
+ html{font-size:18px}
+ body{font-size:19px!important}
+ p,li,label,small,.hint,.muted,.description,.subtitle{font-size:1.05rem!important}
+ button,.btn,.tab,.submit,input,select,textarea{font-size:1.02rem!important}
+}
+
 </style>
 </head>
 <body>
