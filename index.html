@@ -111,6 +111,7 @@ footer{font-size:1.05rem!important;line-height:2!important}
 
 <p class="hint"><a href="admin.html">مالک / ڈرائیور لاگ اِن پینل</a></p>
 </section>
+<section class="wrap" id="site-qr" style="text-align:center"><div class="card" style="max-width:520px;margin:auto;background:#fff;border:2px solid var(--pink-deep)"><h2 class="heading" id="qrTitle">ویب سائٹ کھولنے کے لیے QR کوڈ</h2><p id="qrHint" style="text-align:center">موبائل کیمرے سے کوڈ اسکین کریں اور Gujjar Transport کی ویب سائٹ کھولیں۔</p><a href="https://gujjar-transport-78.vercel.app/" target="_blank" rel="noopener" aria-label="Open Gujjar Transport website"><img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=https%3A%2F%2Fgujjar-transport-78.vercel.app%2F" alt="Gujjar Transport website QR code" width="240" height="240" style="display:block;width:240px;height:240px;max-width:100%;margin:12px auto;border-radius:8px;background:#fff" loading="lazy"></a><p style="text-align:center;direction:ltr"><a href="https://gujjar-transport-78.vercel.app/" target="_blank" rel="noopener">gujjar-transport-78.vercel.app</a></p></div></section>
 <footer>گجر ٹرانسپورٹ | گجر گروپ 786<br><span style="display:inline-block;margin-top:8px">Website Developed by <b>KB Web Development</b><br>ویب سائٹ تیار کردہ: <b>KB Web Development</b><br>رابطہ: <a href="tel:+923323724225" style="color:inherit">0332 3724225</a> · <a href="https://wa.me/923323724225" target="_blank" rel="noopener" style="color:inherit">WhatsApp</a></span></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -165,7 +166,9 @@ const staticTranslations = [
  ['#routes > .hint','کرایوں کی حتمی تصدیق بکنگ کے وقت کمپنی سے کریں | Confirm final fares with the company','Please confirm final fares with the company when booking'],
  ['#drivers > .heading','ہمارے ڈرائیور | Our Drivers','Our Drivers'],
  ['#drivers > p.hint','صرف مالک کے منظور کردہ فعال ڈرائیوروں کے نام دکھائے جاتے ہیں۔','Only active drivers approved by the owner are shown.'],
- ['#drivers a[href="admin.html"]','مالک / ڈرائیور لاگ اِن پینل','Owner / Driver Login Panel']
+ ['#drivers a[href="admin.html"]','مالک / ڈرائیور لاگ اِن پینل','Owner / Driver Login Panel'],
+ ['#qrTitle','ویب سائٹ کھولنے کے لیے QR کوڈ','Scan to Open Our Website'],
+ ['#qrHint','موبائل کیمرے سے کوڈ اسکین کریں اور Gujjar Transport کی ویب سائٹ کھولیں۔','Scan this code with your phone camera to open the Gujjar Transport website.']
 ];
 function applyExtraLanguage(){
  staticTranslations.forEach(([sel,ur,en])=>{const el=document.querySelector(sel);if(el)el.textContent=english?en:ur});
