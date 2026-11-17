@@ -43,7 +43,7 @@ footer{background:#06162f;color:white;text-align:center;padding:24px}footer b{co
 <label class="wide"><span id="detailsText">مزید تفصیل</span><textarea id="details" name="details" rows="2"></textarea></label>
 <button class="submit wide" type="submit" id="submitText">درخواست جمع کروائیں</button>
 </form><div class="notice" id="notice" role="status"></div>
-<p class="hint" id="hint">یہ فی الحال ڈیزائن کا پیش منظر ہے۔ حقیقی بکنگ محفوظ کرنے اور ایڈمن پینل کے لیے الگ ڈیٹابیس منسلک کرنا ضروری ہے۔</p>
+<p class="hint" id="hint">بکنگ کی درخواست ڈیٹابیس میں محفوظ ہوگی؛ کمپنی کی تصدیق کے بعد ہی بکنگ منظور ہوگی۔</p>
 </div></section>
 
 <section class="wrap" id="drivers">
@@ -66,7 +66,7 @@ servicesTitle:['ہماری سہولیات','Our Services'],familyTitle:['فیم�
 airportTitle:['ایئرپورٹ پک اَپ اور ڈراپ','Airport Pick-up & Drop-off'],airportDesc:['ایئرپورٹ آنے جانے کے لیے آرام دہ گاڑیاں۔','Comfortable airport transfers.'],
 cargoTitle:['لوڈنگ اور سامان کی ترسیل','Loading & Goods Transport'],cargoDesc:['سامان اور مال برداری کے لیے الگ گاڑیوں کی بکنگ۔','Separate vehicle bookings for cargo and goods.'],
 bookingTitle:['آن لائن بکنگ کی درخواست','Online Booking Request'],nameText:['نام','Name'],phoneText:['موبائل نمبر','Mobile Number'],fromText:['کہاں سے','Pickup Location'],destinationText:['منزل شہر','Destination City'],dateText:['سفر کی تاریخ','Travel Date'],passengerText:['مسافروں کی تعداد','Number of Passengers'],airportText:['ایئرپورٹ / فلائٹ کی تفصیل','Airport / Flight Details'],cargoText:['سامان / لوڈ کی تفصیل','Goods / Load Details'],vehicleText:['گاڑی کی قسم','Vehicle Type'],detailsText:['مزید تفصیل','Additional Details'],submitText:['درخواست جمع کروائیں','Submit Booking Request'],
-hint:['یہ فی الحال ڈیزائن کا پیش منظر ہے۔ حقیقی بکنگ محفوظ کرنے اور ایڈمن پینل کے لیے الگ ڈیٹابیس منسلک کرنا ضروری ہے.','This is currently a design preview. A separate database is required to save real bookings and provide an admin panel.']
+hint:['یہ فی الحال ڈیزائن کا پیش منظر ہے۔ حقیقی بکنگ محفوظ کرنے اور ایڈمن پینل کے لیے الگ ڈیٹابیس منسلک کرنا ضروری ہے.','Booking requests are saved in the database; the company must confirm each booking.']
 };
 function toggleLanguage(){
  english=!english;document.documentElement.lang=english?'en':'ur';document.documentElement.dir=english?'ltr':'rtl';
@@ -110,9 +110,9 @@ document.getElementById('bookingForm').addEventListener('submit',async function(
   notes:document.getElementById('details').value.trim()||null
  };
  try{
-  const {data,error}=await supabaseClient.from('bookings').insert(payload).select('booking_code').single();
+  const {error}=await supabaseClient.from('bookings').insert(payload);
   if(error)throw error;
-  box.textContent=english?'Booking request received. Your reference number is: '+data.booking_code:'آپ کی بکنگ درخواست موصول ہوگئی۔ حوالہ نمبر: '+data.booking_code;
+  box.textContent=english?'Your booking request has been received. The company will contact you to confirm it.':'آپ کی بکنگ درخواست موصول ہوگئی ہے۔ تصدیق کے لیے کمپنی آپ سے رابطہ کرے گی۔'
   box.style.display='block';box.style.background='#eaf8ef';box.style.color='#14532d';
   document.getElementById('bookingForm').reset();
  }catch(err){
