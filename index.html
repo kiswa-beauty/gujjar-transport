@@ -123,7 +123,7 @@ async function loadPublicVehicles(){
  try{
   const {data,error}=await supabaseClient.from('vehicles').select('id,title,vehicle_type,capacity,photo_path').eq('is_active',true).order('created_at',{ascending:false});
   if(error)throw error;
-  if(!data||!data.length){el.innerHTML='<div class="fleet-empty">فی الحال گاڑیوں کی تفصیل دستیاب نہیں | No vehicles published yet</div>';return;}
+  if(!data||!data.length){el.innerHTML='<div class="fleet-empty">'+(english?'No vehicles published yet':'فی الحال گاڑیوں کی تفصیل دستیاب نہیں')+'</div>';return;}
   el.innerHTML=data.map(v=>{
    const photo=v.photo_path?supabaseClient.storage.from('vehicle-photos').getPublicUrl(v.photo_path).data.publicUrl:'';
    const type=({passenger:'مسافر / Passenger',airport:'ایئرپورٹ / Airport',cargo:'لوڈنگ / Cargo'})[v.vehicle_type]||'Transport';
@@ -136,8 +136,8 @@ loadPublicVehicles();
 async function loadPublicRoutes(){
  const el=document.getElementById('routeList');
  try{const {data,error}=await supabaseClient.from('routes').select('id,service_type,pickup_city,destination_city,fare_text,notes').eq('is_active',true).order('created_at',{ascending:false});if(error)throw error;
- if(!data.length){el.innerHTML='<div class="fleet-empty">روٹس اور کرائے جلد شامل کیے جائیں گے | Routes and fares will be added soon</div>';return;}
- el.innerHTML=data.map(r=>'<article class="card"><div class="ico">🛣️</div><h3>'+String(r.pickup_city).replace(/[&<>"']/g,'')+' → '+String(r.destination_city).replace(/[&<>"']/g,'')+'</h3><p>'+({passenger:'مسافر / Passenger',airport:'ایئرپورٹ / Airport',cargo:'لوڈنگ / Cargo'}[r.service_type]||'Transport')+'</p><p><b>کرایہ / Fare: '+String(r.fare_text).replace(/[&<>"']/g,'')+'</b></p>'+(r.notes?'<p>'+String(r.notes).replace(/[&<>"']/g,'')+'</p>':'')+'</article>').join('');
+ if(!data.length){el.innerHTML='<div class="fleet-empty">'+(english?'Routes and fares will be added soon':'روٹس اور کرائے جلد شامل کیے جائیں گے')+'</div>';return;}
+ el.innerHTML=data.map(r=>'<article class="card"><div class="ico">🛣️</div><h3>'+String(r.pickup_city).replace(/[&<>"']/g,'')+' → '+String(r.destination_city).replace(/[&<>"']/g,'')+'</h3><p>'+({passenger:'مسافر / Passenger',airport:'ایئرپورٹ / Airport',cargo:'لوڈنگ / Cargo'}[r.service_type]||'Transport')+'</p><p><b>Fare: '+String(r.fare_text).replace(/[&<>"']/g,'')+'</b></p>'+(r.notes?'<p>'+String(r.notes).replace(/[&<>"']/g,'')+'</p>':'')+'</article>').join('');
  }catch(e){el.innerHTML='<div class="fleet-empty">روٹس ابھی دستیاب نہیں | Routes unavailable</div>';}
 }
 async function loadPublicDrivers(){
@@ -155,6 +155,34 @@ cargoTitle:['لوڈنگ اور سامان کی ترسیل','Loading & Goods Tran
 bookingTitle:['آن لائن بکنگ کی درخواست','Online Booking Request'],nameText:['نام','Name'],phoneText:['موبائل نمبر','Mobile Number'],fromText:['کہاں سے','Pickup Location'],destinationText:['منزل شہر','Destination City'],dateText:['سفر کی تاریخ','Travel Date'],passengerText:['مسافروں کی تعداد','Number of Passengers'],airportText:['ایئرپورٹ / فلائٹ کی تفصیل','Airport / Flight Details'],cargoText:['سامان / لوڈ کی تفصیل','Goods / Load Details'],vehicleText:['گاڑی کی قسم','Vehicle Type'],detailsText:['مزید تفصیل','Additional Details'],submitText:['درخواست جمع کروائیں','Submit Booking Request'],
 hint:['بکنگ درخواست موصول ہونے کے بعد کمپنی آپ سے رابطہ کرے گی؛ تصدیق کے بعد ہی بکنگ منظور ہوگی۔','The company will contact you after receiving the request. Bookings are confirmed by the company.']
 };
+
+/* Complete bilingual public-page labels */
+const staticTranslations = [
+ ['#contact > .heading','مالک سے رابطہ','Contact the Owner'],
+ ['#fleet > .heading','ہماری گاڑیاں | Our Fleet','Our Fleet'],
+ ['#fleet > .hint','مالک کی جانب سے شامل کردہ دستیاب گاڑیاں اور تصاویر | Vehicles published by the owner','Available vehicles and photos published by the owner'],
+ ['#routes > .heading','روٹس اور کرائے | Routes & Fares','Routes & Fares'],
+ ['#routes > .hint','کرایوں کی حتمی تصدیق بکنگ کے وقت کمپنی سے کریں | Confirm final fares with the company','Please confirm final fares with the company when booking'],
+ ['#drivers > .heading','ہمارے ڈرائیور | Our Drivers','Our Drivers'],
+ ['#drivers > p.hint','صرف مالک کے منظور کردہ فعال ڈرائیوروں کے نام دکھائے جاتے ہیں۔','Only active drivers approved by the owner are shown.'],
+ ['#drivers a[href="admin.html"]','مالک / ڈرائیور لاگ اِن پینل','Owner / Driver Login Panel']
+];
+function applyExtraLanguage(){
+ staticTranslations.forEach(([sel,ur,en])=>{const el=document.querySelector(sel);if(el)el.textContent=english?en:ur});
+ document.querySelector('.top .brand span').innerHTML=english?'Gujjar Transport<small>Gujjar Group 786</small>':'گجر ٹرانسپورٹ<small>گجر گروپ 786</small>';
+ document.querySelector('.hero .hero-tagline').textContent=english?'Comfortable Travel, Safe Destination':'آرام دہ سفر، محفوظ منزل';
+ document.querySelector('.hero h1').textContent=english?'Gujjar Transport':'گجر ٹرانسپورٹ';
+ document.querySelector('.hero .gold').textContent=english?'Your Trusted Travel Partner • Gujjar Group 786':'آپ کے اعتماد کا سفری ساتھی • گجر گروپ 786';
+ document.querySelector('.top .brand').setAttribute('dir',english?'ltr':'rtl');
+ document.querySelector('footer').innerHTML=english?'Gujjar Transport | Gujjar Group 786<br><span style="display:inline-block;margin-top:8px">Website Developed by <b>KB Web Development</b><br>Contact: <a href="tel:+923323724225" style="color:inherit">0332 3724225</a> · <a href="https://wa.me/923323724225" target="_blank" rel="noopener" style="color:inherit">WhatsApp</a></span>':'گجر ٹرانسپورٹ | گجر گروپ 786<br><span style="display:inline-block;margin-top:8px">ویب سائٹ تیار کردہ: <b>KB Web Development</b><br>رابطہ: <a href="tel:+923323724225" style="color:inherit">0332 3724225</a> · <a href="https://wa.me/923323724225" target="_blank" rel="noopener" style="color:inherit">WhatsApp</a></span>';
+ document.getElementById('from').value=english?'Bhalwal':'بھلوال';
+ document.getElementById('airportDetails').placeholder=english?'e.g. Lahore Airport, flight number':'مثلاً لاہور ایئرپورٹ، فلائٹ نمبر';
+ document.getElementById('cargoDetails').placeholder=english?'Type of goods and approximate weight':'سامان کی نوعیت اور اندازاً وزن';
+ const vehicle=document.getElementById('vehicleType');
+ [...vehicle.options].forEach((o,i)=>o.text=english?['Select','Small Loader','Shehzore','Mazda','Truck','Other'][i]:['منتخب کریں','چھوٹی لوڈر','شہزور','مزدا','ٹرک','دیگر'][i]);
+ const footerLinks=document.querySelectorAll('footer a');
+}
+
 function setLanguage(nextEnglish){
  english=Boolean(nextEnglish);document.documentElement.lang=english?'en':'ur';document.documentElement.dir=english?'ltr':'rtl';
  Object.keys(words).forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=words[id][english?1:0]});
@@ -166,6 +194,7 @@ function setLanguage(nextEnglish){
  const dest=document.getElementById('destination');dest.options[0].text=english?'Select a city':'شہر منتخب کریں';
  document.querySelectorAll('#destination option').forEach((o,i)=>{if(i>0&&o.value==='دیگر')o.text=english?'Other':'دیگر'});
  setMode(currentMode);
+ applyExtraLanguage();
 }
 function setMode(mode){
  currentMode=mode;
