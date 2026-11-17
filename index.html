@@ -56,7 +56,9 @@ footer{background:#06162f;color:white;text-align:center;padding:24px}footer b{co
 <p class="hint"><a href="admin.html">مالک / ڈرائیور لاگ اِن پینل</a></p>
 </section>
 <footer>گجر ٹرانسپورٹ | گجر گروپ 786<br><b>Website Developed by KB کمپنی</b></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const supabaseClient = window.supabase.createClient("https://abapprgihwgyurdwbwyt.supabase.co", "sb_publishable_KYi-bfNt7VDyxmh1n30JrA_KaOU9vzL");
 let currentMode='p',english=false;
 const words={
 intro:['بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔','Family travel, airport transfers and goods transport from Bhalwal across Pakistan.'],
@@ -92,10 +94,31 @@ function setMode(mode){
  document.getElementById('bookingTitle').textContent=(english?{p:'Passenger / Family Booking',a:'Airport Transfer Booking',l:'Loading & Goods Booking'}:{p:'مسافر / فیملی بکنگ',a:'ایئرپورٹ بکنگ',l:'لوڈنگ اور سامان کی بکنگ'})[mode];
  document.getElementById('notice').style.display='none';
 }
-document.getElementById('bookingForm').addEventListener('submit',function(e){
+document.getElementById('bookingForm').addEventListener('submit',async function(e){
  e.preventDefault();
- const message=english?'Your form preview is working, but this request has NOT been sent or saved. Live booking will be enabled after a separate database and admin panel are connected.':'فارم درست کام کر رہا ہے، لیکن یہ درخواست ابھی بھیجی یا محفوظ نہیں ہوئی۔ حقیقی بکنگ کے لیے الگ ڈیٹابیس اور ایڈمن پینل منسلک کرنا ہوگا۔';
- const box=document.getElementById('notice');box.textContent=message;box.style.display='block';
+ const button=document.getElementById('submitText'), box=document.getElementById('notice');
+ button.disabled=true;button.textContent=english?'Sending...':'درخواست بھیجی جا رہی ہے...';
+ const payload={
+  service_type:currentMode==='p'?'passenger':currentMode==='a'?'airport':'cargo',
+  customer_name:document.getElementById('customerName').value.trim(),
+  customer_phone:document.getElementById('phone').value.trim(),
+  pickup_city:document.getElementById('from').value.trim(),
+  destination_city:document.getElementById('destination').value,
+  travel_date:document.getElementById('travelDate').value||null,
+  passengers:currentMode==='l'?null:Number(document.getElementById('passengers').value||1),
+  goods_details:currentMode==='l'?(document.getElementById('cargoDetails').value+' | گاڑی: '+document.getElementById('vehicleType').value):(currentMode==='a'?document.getElementById('airportDetails').value:null),
+  notes:document.getElementById('details').value.trim()||null
+ };
+ try{
+  const {data,error}=await supabaseClient.from('bookings').insert(payload).select('booking_code').single();
+  if(error)throw error;
+  box.textContent=english?'Booking request received. Your reference number is: '+data.booking_code:'آپ کی بکنگ درخواست موصول ہوگئی۔ حوالہ نمبر: '+data.booking_code;
+  box.style.display='block';box.style.background='#eaf8ef';box.style.color='#14532d';
+  document.getElementById('bookingForm').reset();
+ }catch(err){
+  box.textContent=english?'Could not submit the booking. Please try again later or contact the company.':'بکنگ جمع نہیں ہو سکی۔ براہ کرم دوبارہ کوشش کریں یا کمپنی سے رابطہ کریں۔';
+  box.style.display='block';box.style.background='#fff1f0';box.style.color='#8a1c16';
+ }finally{button.disabled=false;button.textContent=words.submitText[english?1:0];}
 });
 </script>
 </body></html>
