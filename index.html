@@ -14,7 +14,7 @@
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.card,.panel{background:white;border:1px solid #e3e8f0;border-radius:15px;padding:20px}.card h3{color:var(--navy)}.ico{font-size:30px}
 .booking{background:#fffaf0;border-block:1px solid #f0dfb7}.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:15px}.tab{padding:10px 14px;border-radius:8px;border:1px solid #ccd5e1;background:white;cursor:pointer;font:inherit}.tab.active{background:var(--navy);color:white}
 .form{max-width:760px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}.form label{font-weight:bold;font-size:14px;display:block}.form input,.form select,.form textarea{display:block;width:100%;padding:12px;border:1px solid #ccd5e1;border-radius:8px;margin-top:4px;font:inherit;background:white;color:var(--ink)}.wide{grid-column:1/-1}.submit{background:var(--navy);color:white;border:0;border-radius:8px;padding:13px;font:inherit;font-weight:bold;cursor:pointer}.hint{text-align:center;color:var(--muted);font-size:13px}.hide{display:none!important}
-.notice{max-width:760px;margin:14px auto 0;padding:12px;border-radius:9px;background:#edf5ff;color:#17345a;display:none;text-align:center}
+.fleet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}.fleet-card{background:#fff;border:1px solid #e3e8f0;border-radius:15px;overflow:hidden}.fleet-card img{width:100%;height:170px;object-fit:cover;background:#e9eef5}.fleet-card .fleet-info{padding:15px}.fleet-card h3{margin:0;color:var(--navy)}.fleet-empty{text-align:center;color:var(--muted);padding:18px}.notice{max-width:760px;margin:14px auto 0;padding:12px;border-radius:9px;background:#edf5ff;color:#17345a;display:none;text-align:center}
 footer{background:#06162f;color:white;text-align:center;padding:24px}footer b{color:var(--gold)}
 @media(max-width:560px){.form{grid-template-columns:1fr}.wide{grid-column:auto}.top{padding:12px 4%}.brand{font-size:21px}}
 </style>
@@ -47,6 +47,7 @@ footer{background:#06162f;color:white;text-align:center;padding:24px}footer b{co
 </div></section>
 
 <section class="wrap" id="contact"><h2 class="heading">مالک سے رابطہ</h2><div class="card" style="text-align:center"><h3 id="ownerName">چوہدری سلطان گجر | Chaudhry Sultan Gujjar</h3><p><span id="ownerPhone">0301 3278532</span></p><a class="btn" id="ownerWhatsApp" href="https://wa.me/923013278532" target="_blank" rel="noopener">WhatsApp / واٹس ایپ</a> <a class="btn" id="ownerCall" href="tel:+923013278532">Call / کال کریں</a></div></section>
+<section class="wrap" id="fleet"><h2 class="heading">ہماری گاڑیاں | Our Fleet</h2><p class="hint">مالک کی جانب سے شامل کردہ دستیاب گاڑیاں اور تصاویر | Vehicles published by the owner</p><div id="fleetList" class="fleet-grid"><div class="fleet-empty">گاڑیاں لوڈ ہو رہی ہیں…</div></div></section>
 <section class="wrap" id="drivers">
 <h2 class="heading">ہمارے ڈرائیور اور گاڑیاں</h2>
 <p class="hint">ڈرائیور اور گاڑیوں کی تازہ فہرست مالک کے تصدیق شدہ ایڈمن پینل سے شائع ہوگی۔</p>
@@ -63,6 +64,21 @@ const supabaseClient = window.supabase.createClient("https://abapprgihwgyurdwbwy
 let currentMode='p',english=false;
 async function loadCompanyContact(){try{const {data}=await supabaseClient.from('company_settings').select('owner_name,owner_phone,call_phone,whatsapp_phone').eq('id',true).maybeSingle();if(!data)return;document.getElementById('ownerName').textContent=(data.owner_name||'چوہدری سلطان گجر')+' | Chaudhry Sultan Gujjar';document.getElementById('ownerPhone').textContent=data.owner_phone||'';const wa=(data.whatsapp_phone||'').replace(/\\D/g,'');const call=(data.call_phone||data.owner_phone||'').replace(/\\D/g,'');document.getElementById('ownerWhatsApp').href='https://wa.me/'+wa;document.getElementById('ownerCall').href='tel:+'+call;}catch(e){}}
 loadCompanyContact();
+async function loadPublicVehicles(){
+ const el=document.getElementById('fleetList');
+ try{
+  const {data,error}=await supabaseClient.from('vehicles').select('id,title,vehicle_type,capacity,photo_path').eq('is_active',true).order('created_at',{ascending:false});
+  if(error)throw error;
+  if(!data||!data.length){el.innerHTML='<div class="fleet-empty">فی الحال گاڑیوں کی تفصیل دستیاب نہیں | No vehicles published yet</div>';return;}
+  el.innerHTML=data.map(v=>{
+   const photo=v.photo_path?supabaseClient.storage.from('vehicle-photos').getPublicUrl(v.photo_path).data.publicUrl:'';
+   const type=({passenger:'مسافر / Passenger',airport:'ایئرپورٹ / Airport',cargo:'لوڈنگ / Cargo'})[v.vehicle_type]||'Transport';
+   const title=String(v.title).replace(/[&<>"']/g,'');
+   return '<article class="fleet-card">'+(photo?'<img loading="lazy" src="'+photo.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'" alt="'+title+'">':'<div class="fleet-empty">🚐</div>')+'<div class="fleet-info"><h3>'+title+'</h3><p>'+type+'</p>'+(v.capacity?'<p>گنجائش / Capacity: '+String(v.capacity).replace(/[&<>"']/g,'')+'</p>':'')+'</div></article>';
+  }).join('');
+ }catch(err){el.innerHTML='<div class="fleet-empty">گاڑیوں کی فہرست ابھی دستیاب نہیں۔ | Fleet temporarily unavailable.</div>';}
+}
+loadPublicVehicles();
 const words={
 intro:['بھلوال سے پاکستان بھر میں فیملی سفر، ایئرپورٹ ٹرانسفر اور سامان کی ترسیل کی سہولت۔','Family travel, airport transfers and goods transport from Bhalwal across Pakistan.'],
 servicesTitle:['ہماری سہولیات','Our Services'],familyTitle:['فیملی اور مسافر ٹرانسپورٹ','Family & Passenger Transport'],familyDesc:['بھلوال سے پاکستان کے مختلف شہروں کے لیے گاڑیوں کی بکنگ۔','Vehicle bookings from Bhalwal to cities across Pakistan.'],
