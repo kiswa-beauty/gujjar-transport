@@ -324,9 +324,8 @@ footer{border-top:5px solid #d9ad45!important}
 <form class="form panel" id="bookingForm">
 <label><span id="nameText">نام</span><input id="customerName" name="customerName" autocomplete="name" required></label>
 <label><span id="phoneText">موبائل نمبر</span><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
-<label><span id="fromText">کہاں سے</span><input id="from" name="from" value="بھلوال" required></label>
-<label><span id="destinationText">منزل شہر</span><select id="destination" name="destination" required><option value="">شہر منتخب کریں</option>
-<option>لاہور</option><option>اسلام آباد</option><option>راولپنڈی</option><option>سرگودھا</option><option>فیصل آباد</option><option>گوجرانوالہ</option><option>سیالکوٹ</option><option>گجرات</option><option>ملتان</option><option>بہاولپور</option><option>کراچی</option><option>حیدرآباد</option><option>سکھر</option><option>پشاور</option><option>مردان</option><option>کوئٹہ</option><option>مظفرآباد</option><option>میرپور</option><option>گلگت</option><option>اسکردو</option><option>ایبٹ آباد</option><option>جہلم</option><option>چکوال</option><option>خوشاب</option><option>میانوالی</option><option>بھکر</option><option>لیہ</option><option>ڈی جی خان</option><option>رحیم یار خان</option><option>ساہیوال</option><option>اوکاڑہ</option><option>قصور</option><option>شیخوپورہ</option><option>نارووال</option><option>دیگر</option></select></label>
+<label><span id="fromText">کہاں سے</span><select id="from" name="from" required><option value="">شہر منتخب کریں</option><option selected>بھلوال</option></select></label>
+<label><span id="destinationText">منزل شہر</span><select id="destination" name="destination" required><option value="">شہر منتخب کریں</option></select></label>
 <label><span id="dateText">سفر کی تاریخ</span><input id="travelDate" name="travelDate" type="date" required></label>
 <label id="passengerField"><span id="passengerText">مسافروں کی تعداد</span><input id="passengers" name="passengers" type="number" min="1" max="60" value="1"></label>
 <label id="airportField" class="hide"><span id="airportText">ایئرپورٹ / فلائٹ کی تفصیل</span><input id="airportDetails" name="airportDetails" placeholder="مثلاً لاہور ایئرپورٹ، فلائٹ نمبر"></label>
@@ -353,6 +352,17 @@ footer{border-top:5px solid #d9ad45!important}
 <script>
 const supabaseClient = window.supabase.createClient("https://abapprgihwgyurdwbwyt.supabase.co", "sb_publishable_KYi-bfNt7VDyxmh1n30JrA_KaOU9vzL");
 let currentMode='p',english=false;
+async function loadBookingCities(){
+ const from=document.getElementById('from'),to=document.getElementById('destination');
+ try{
+  const {data,error}=await supabaseClient.from('cities').select('name').eq('is_active',true).order('name');
+  if(error||!data||!data.length)return;
+  const fromValue=from.value||'بھلوال',toValue=to.value;
+  const makeOptions=(select,placeholder,selected)=>{select.innerHTML='';const first=document.createElement('option');first.value='';first.textContent=english?'Select a city':placeholder;select.appendChild(first);data.forEach(city=>{const option=document.createElement('option');option.value=city.name;option.textContent=city.name;select.appendChild(option)});if(selected&&data.some(city=>city.name===selected))select.value=selected;};
+  makeOptions(from,'شہر منتخب کریں',fromValue);makeOptions(to,'شہر منتخب کریں',toValue);
+ }catch(e){console.warn('City list unavailable; keeping fallback options.',e)}
+}
+loadBookingCities();
 async function loadCompanyContact(){try{const {data}=await supabaseClient.from('company_settings').select('owner_name,owner_phone,call_phone,whatsapp_phone').eq('id',true).maybeSingle();if(!data)return;document.getElementById('ownerName').textContent=(data.owner_name||'چوہدری سلطان گجر')+' | Chaudhry Sultan Gujjar';document.getElementById('ownerPhone').textContent=data.owner_phone||'';const wa=(data.whatsapp_phone||'').replace(/\\D/g,'');const call=(data.call_phone||data.owner_phone||'').replace(/\\D/g,'');document.getElementById('ownerWhatsApp').href='https://wa.me/'+wa;document.getElementById('ownerCall').href='tel:+'+call;}catch(e){}}
 loadCompanyContact();
 async function loadPublicVehicles(){
